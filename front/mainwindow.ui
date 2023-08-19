@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::NoContextMenu</enum>
+  </property>
+  <property name="acceptDrops">
+   <bool>false</bool>
+  </property>
+  <property name="windowTitle">
+   <string>3DViewer</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget {
+  background-color: #34372e;
+}</string>
+   </property>
+   <widget class="QPushButton" name="openFile">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>520</y>
+      <width>190</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font-size: 23px;
+    font-weight: 500;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    background: #916d82;
+}
+
+QPushButton:pressed{
+    background: #5e4855;
+    position: relative;
+    top: 5px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Открыть файл</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="numberOfVertexes">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>590</y>
+      <width>481</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 23px;
+font-weight: 500;
+color: #fefff8;
+}</string>
+    </property>
+    <property name="text">
+     <string>Количество вершин:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="numberOfFacet">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>630</y>
+      <width>391</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 23px;
+font-weight: 500;
+color: #fefff8;
+}</string>
+    </property>
+    <property name="text">
+     <string>Количество граней:</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="gb_rotation">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>40</y>
+      <width>380</width>
+      <height>170</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QGroupBox {
+    border: 2px solid #916d82;
+    font-size: 23px;
+    font-weight: 500;
+    color: #fefff8;
+    margin-top: 1ex; 
+    margin-left: 6ex; 
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top center;
+} </string>
+    </property>
+    <property name="title">
+     <string>Вращение</string>
+    </property>
+    <widget class="QSpinBox" name="rotateZSpinBox">
+     <property name="geometry">
+      <rect>
+       <x>303</x>
+       <y>120</y>
+       <width>51</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QSpinBox{
+background-color: #fefff8;
+color:  black;
+}</string>
+     </property>
+     <property name="minimum">
+      <number>-180</number>
+     </property>
+     <property name="maximum">
+      <number>180</number>
+     </property>
+    </widget>
+    <widget class="QSlider" name="rotateYSlider">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>85</y>
+       <width>160</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QSlider::groove:horizontal {
+    border-radius: 1px;       
+    height: 7px;              
+    margin: -1px 0;           
+}
+QSlider::handle:horizontal {
+    background-color: #fefff8;
+    border: 2px solid #fefff8;
+    height: 14px;     
+    width: 12px;
+    margin: -4px 0;     
+    border-radius: 7px  ;
+    padding: -4px 0px;  
+}
+
+QSlider::add-page:horizontal {
+    background: #916d82;
+}
+QSlider::sub-page:horizontal {
+    background: #5e4855;
+}</string>
+     </property>
+     <property name="minimum">
+      <number>-180</number>
+     </property>
+     <property name="maximum">
+      <number>180</number>
+     </property>
+     <property name="singleStep">
+      <number>1</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_ry">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>85</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>-1</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+color: #fefff8;
+font-size: 23px;
+}</string>
+     </property>
+     <property name="text">
+      <string>Y</string>
+     </property>
+    </widget>
+    <widget class="QSlider" name="rotateZSlider">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>125</y>
+       <width>160</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QSlider::groove:horizontal {
+    border-radius: 1px;       
+    height: 7px;              
+    margin: -1px 0;           
+}
+QSlider::handle:horizontal {
+    background-color: #fefff8;
+    border: 2px solid #fefff8;
+    height: 14px;     
+    width: 12px;
+    margin: -4px 0;     
+    border-radius: 7px  ;
+    padding: -4px 0px;  
+}
+
+QSlider::add-page:horizontal {
+    background: #916d82;
+}
+QSlider::sub-page:horizontal {
+    background: #5e4855;
+}</string>
+     </property>
+     <property name="minimum">
+      <number>-180</number>
+     </property>
+     <property name="maximum">
+      <number>180</number>
+     </property>
+     <property name="singleStep">
+      <number>1</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="rotateXSpinBox">
+     <property name="geometry">
+      <rect>
+       <x>303</x>
+       <y>40</y>
+       <width>51</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QSpinBox{
+background-color: #fefff8;
+color:  black;
+}</string>
+     </property>
+     <property name="minimum">
+      <number>-180</number>
+     </property>
+     <property name="maximum">
+      <number>180</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_rx">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>45</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>-1</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+color: #fefff8;
+font-size: 23px;
+}</string>
+     </property>
+     <property name="text">
+      <string>X</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="rotateYSpinBox">
+     <property name="geometry">
+      <rect>
+       <x>303</x>
+       <y>80</y>
+       <width>51</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QSpinBox{
+background-color: #fefff8;
+color:  black;
+}</string>
+     </property>
+     <property name="minimum">
+      <number>-180</number>
+     </property>
+     <property name="maximum">
+      <number>180</number>
+     </property>
+    </widget>
+    <widget class="QSlider" name="rotateXSlider">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>45</y>
+       <width>160</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QSlider::groove:horizontal {
+    border-radius: 1px;       
+    height: 7px;              
+    margin: -1px 0;           
+}
+QSlider::handle:horizontal {
+    background-color: #fefff8;
+    border: 2px solid #fefff8;
+    height: 14px;     
+    width: 12px;
+    margin: -4px 0;     
+    border-radius: 7px  ;
+    padding: -4px 0px;  
+}
+
+QSlider::add-page:horizontal {
+    background: #916d82;
+}
+QSlider::sub-page:horizontal {
+    background: #5e4855;
+}</string>
+     </property>
+     <property name="minimum">
+      <number>-180</number>
+     </property>
+     <property name="maximum">
+      <number>180</number>
+     </property>
+     <property name="singleStep">
+      <number>1</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_rz">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>125</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>-1</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+color: #fefff8;
+font-size: 23px;
+}</string>
+     </property>
+     <property name="text">
+      <string>Z</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="fileName">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>550</y>
+      <width>421</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 23px;
+    font-weight: 500;
+color: #fefff8;
+}</string>
+    </property>
+    <property name="text">
+     <string>Имя файла:</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="gb_translate">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>240</y>
+      <width>380</width>
+      <height>170</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QGroupBox {
+    border: 2px solid #916d82;
+    font-size: 23px;
+    font-weight: 500;
+    color: #fefff8;
+    margin-top: 1ex; 
+    margin-left: 6ex; 
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top center;
+} </string>
+    </property>
+    <property name="title">
+     <string>Перемещение</string>
+    </property>
+    <widget class="QSpinBox" name="translateZSpinBox">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>120</y>
+       <width>44</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QSpinBox{
+background-color: #fefff8;
+color:  black;
+}</string>
+     </property>
+    </widget>
+    <widget class="QSlider" name="translateYSlider">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>85</y>
+       <width>160</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QSlider::groove:horizontal {
+    border-radius: 1px;       
+    height: 7px;              
+    margin: -1px 0;           
+}
+QSlider::handle:horizontal {
+    background-color: #fefff8;
+    border: 2px solid #fefff8;
+    height: 14px;     
+    width: 12px;
+    margin: -4px 0;     
+    border-radius: 7px  ;
+    padding: -4px 0px;  
+}
+
+QSlider::add-page:horizontal {
+    background: #916d82;
+}
+QSlider::sub-page:horizontal {
+    background: #5e4855;
+}</string>
+     </property>
+     <property name="maximum">
+      <number>100</number>
+     </property>
+     <property name="singleStep">
+      <number>1</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_ty">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>85</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>-1</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+color: #fefff8;
+font-size: 23px;
+}</string>
+     </property>
+     <property name="text">
+      <string>Y</string>
+     </property>
+    </widget>
+    <widget class="QSlider" name="translateZSlider">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>125</y>
+       <width>160</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QSlider::groove:horizontal {
+    border-radius: 1px;       
+    height: 7px;              
+    margin: -1px 0;           
+}
+QSlider::handle:horizontal {
+    background-color: #fefff8;
+    border: 2px solid #fefff8;
+    height: 14px;     
+    width: 12px;
+    margin: -4px 0;     
+    border-radius: 7px  ;
+    padding: -4px 0px;  
+}
+
+QSlider::add-page:horizontal {
+    background: #916d82;
+}
+QSlider::sub-page:horizontal {
+    background: #5e4855;
+}</string>
+     </property>
+     <property name="maximum">
+      <number>100</number>
+     </property>
+     <property name="singleStep">
+      <number>1</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="translateXSpinBox">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>40</y>
+       <width>44</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QSpinBox{
+background-color: #fefff8;
+color:  black;
+}</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_tx">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>45</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>-1</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+color: #fefff8;
+font-size: 23px;
+}</string>
+     </property>
+     <property name="text">
+      <string>X</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="translateYSpinBox">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>80</y>
+       <width>44</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QSpinBox{
+background-color: #fefff8;
+color:  black;
+}</string>
+     </property>
+    </widget>
+    <widget class="QSlider" name="translateXSlider">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>45</y>
+       <width>160</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QSlider::groove:horizontal {
+    border-radius: 1px;       
+    height: 7px;              
+    margin: -1px 0;           
+}
+QSlider::handle:horizontal {
+    background-color: #fefff8;
+    border: 2px solid #fefff8;
+    height: 14px;     
+    width: 12px;
+    margin: -4px 0;     
+    border-radius: 7px  ;
+    padding: -4px 0px;  
+}
+
+QSlider::add-page:horizontal {
+    background: #916d82;
+}
+QSlider::sub-page:horizontal {
+    background: #5e4855;
+}</string>
+     </property>
+     <property name="maximum">
+      <number>100</number>
+     </property>
+     <property name="singleStep">
+      <number>1</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_tz">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>125</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>-1</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+color: #fefff8;
+font-size: 23px;
+}</string>
+     </property>
+     <property name="text">
+      <string>Z</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>440</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 23px;
+    font-weight: 500;
+color: #fefff8;
+}</string>
+    </property>
+    <property name="text">
+     <string>Маштаб</string>
+    </property>
+   </widget>
+   <widget class="Canvas" name="canvas">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>651</width>
+      <height>521</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border 1px solid; 
+border-radius: 2px</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="doubleSpinBox">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>440</y>
+      <width>91</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #fefff8;
+color:  black;</string>
+    </property>
+    <property name="minimum">
+     <double>-1000000.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>1000000.000000000000000</double>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Canvas</class>
+   <extends>QFrame</extends>
+   <header>canvas.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
