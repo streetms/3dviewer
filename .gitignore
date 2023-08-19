@@ -1,2 +1,8 @@
 .idea
 build
+back/matrix/tests
+*.out
+*.a
+*.o
+*.user
+*.stash
