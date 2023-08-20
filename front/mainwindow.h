@@ -22,6 +22,8 @@ private:    //void drawFigure();
     figure3D_t figure;
     Ui::MainWindow *ui;
     double to_radian(double degree);
+    void openFile();
+        QPalette pal;
     template <typename Item,typename T>
     void setValue(Item* item, T value){
         item->blockSignals(true);
@@ -29,6 +31,7 @@ private:    //void drawFigure();
         item->blockSignals(false);
     }
 private slots:
+
     void on_openFile_clicked();
 
     void on_rotateXSpinBox_textChanged(const QString &arg1);
@@ -48,6 +51,10 @@ private slots:
     void on_translateYSlider_valueChanged(int value);
 
     void on_translateYSpinBox_valueChanged(int arg1);
+
+    void on_openFileAction_triggered();
+
+    void on_action_triggered();
 
 signals:
     void updateFigure();

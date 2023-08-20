@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     setlocale(LC_ALL,"C");
+
     ui->setupUi(this);
     figure.facetArray.size = 0;
     ui->canvas->setFigure(&figure);
@@ -40,6 +41,28 @@ MainWindow::~MainWindow()
 double MainWindow::to_radian(double degree)
 {
     return degree*2*M_PI/360;
+}
+
+void MainWindow::openFile()
+{
+    bool ok;
+    QString path = QFileDialog::getOpenFileName(0,"выбор файла", "", "");
+    if (!path.isEmpty()){
+        destroy_figure(&figure);
+        figure = read_obg_file(path.toStdString().data(),&ok);
+        if (not ok){
+            QMessageBox::critical(this,"ошибка","не удалось открыть файл");
+        } else{
+            ui->fileName->setText("Имя файла: "+ QFileInfo(path).fileName());
+            ui->numberOfVertexes->setText("Количество вершин: "+ QString::number(figure.vertexes.size));
+            ui->numberOfFacet->setText("Количество граней: "+ QString::number(figure.facetArray.size));
+            ui->canvas->repaint();
+            ui->translateXSpinBox->setValue(ui->canvas->size().width()/2);
+            ui->translateYSpinBox->setValue(ui->canvas->size().height()/2);
+            translate_figure(&figure,ui->canvas->size().width()/2,ui->canvas->size().height()/2,0);
+            ui->doubleSpinBox->setValue(1);
+        }
+    }
 }
 
 
@@ -91,24 +114,7 @@ void MainWindow::on_rotateXSlider_valueChanged(int value)
 
 void MainWindow::on_openFile_clicked()
 {
-        bool ok;
-        QString path = QFileDialog::getOpenFileName(0,"выбор файла", "", "");
-        if (!path.isEmpty()){
-            destroy_figure(&figure);
-            figure = read_obg_file(path.toStdString().data(),&ok);
-            if (not ok){
-                QMessageBox::critical(this,"ошибка","не удалось открыть файл");
-            } else{
-                ui->fileName->setText("Имя файла: "+ QFileInfo(path).fileName());
-                ui->numberOfVertexes->setText("Количество вершин: "+ QString::number(figure.vertexes.size));
-                ui->numberOfFacet->setText("Количество граней: "+ QString::number(figure.facetArray.size));
-                ui->canvas->repaint();
-                ui->translateXSpinBox->setValue(ui->canvas->size().width()/2);
-                ui->translateYSpinBox->setValue(ui->canvas->size().height()/2);
-                translate_figure(&figure,ui->canvas->size().width()/2,ui->canvas->size().height()/2,0);
-                ui->doubleSpinBox->setValue(1);
-            }
-        }
+    openFile();
 }
 
 
@@ -151,5 +157,41 @@ void MainWindow::on_translateYSpinBox_valueChanged(int value)
     translate_figure(&figure,figure.center.x,value,figure.center.z);
     ui->canvas->repaint();
     setValue(ui->translateYSlider,value);
+}
+
+
+void MainWindow::on_openFileAction_triggered()
+{
+    openFile();
+}
+
+
+void MainWindow::on_action_triggered()
+{
+    QString s = QFileDialog::getSaveFileName();
+
+    if (figure.facetArray.size != 0){
+        QPixmap pixmap(ui->canvas->size());
+        pixmap.fill(Qt::black);
+        QPainter p;
+        QPen pen(Qt::white);
+        p.begin(&pixmap);
+        p.setPen(pen);
+        facet_t* facets = (facet_t*)figure.facetArray.data;
+        QVector<QPointF> points;
+        vertex_t* vertexes = (vertex_t*)figure.vertexes.data;
+        for (size_t i = 0; i < figure.facetArray.size;i++){
+            int* v = (int*)(facets[i].vertexesId.data);
+            for (size_t j = 0; j < facets[i].vertexesId.size;j++){
+                points.push_back({vertexes[v[j]].x,vertexes[v[j]].y});
+            }
+            p.drawConvexPolygon(points);
+            points.clear();
+        }
+        p.end();
+        if (not pixmap.save(s)){
+             QMessageBox::critical(this,"ошибка","не удалось создать файл");
+        }
+    }
 }
 
