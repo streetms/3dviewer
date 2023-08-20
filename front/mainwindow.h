@@ -16,14 +16,13 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 private:    //void drawFigure();
     figure3D_t figure;
     Ui::MainWindow *ui;
     double to_radian(double degree);
     void openFile();
-        QPalette pal;
     template <typename Item,typename T>
     void setValue(Item* item, T value){
         item->blockSignals(true);
@@ -54,9 +53,8 @@ private slots:
 
     void on_openFileAction_triggered();
 
-    void on_action_triggered();
+    void on_exportFileAction_triggered();
 
-signals:
-    void updateFigure();
+    void on_settingsAction_triggered();
 };
 #endif // MAINWINDOW_H

@@ -741,8 +741,7 @@ color: #fefff8;
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border 1px solid; 
-border-radius: 2px</string>
+     <string notr="true"/>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -772,6 +771,52 @@ color:  black;</string>
     </property>
    </widget>
   </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1000</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>файл</string>
+    </property>
+    <addaction name="openFileAction"/>
+    <addaction name="exportAsAction"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>настройки</string>
+    </property>
+    <addaction name="settingsAction"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
+  </widget>
+  <action name="openFileAction">
+   <property name="text">
+    <string>открыть</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="exportAsAction">
+   <property name="text">
+    <string>эксортировать как</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+E</string>
+   </property>
+  </action>
+  <action name="settingsAction">
+   <property name="text">
+    <string>настройки</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>

@@ -1,10 +1,14 @@
 #include "canvas.h"
 #include <iostream>
 #include <QPainter>
+#include <QPalette>
+#include "app.h"
 Canvas::Canvas(QWidget *parent)
     : QFrame{parent}
 {
-    setStyleSheet(QString::fromUtf8("border: 2px solid green; border-radius: 4px; padding: 2px;"));
+    this->setAutoFillBackground(true);
+    _colorName = App::theApp()->getSettings()->value("background-color","black").toString();
+
 }
 
 void Canvas::setFigure(figure3D_t* figure){
@@ -13,6 +17,8 @@ void Canvas::setFigure(figure3D_t* figure){
 
 void Canvas::paintEvent(QPaintEvent *event)
 {
+    this->setStyleSheet("border: 2px solid white; border-radius: 2px; padding:"
+                        " 2px; background-color:" + _colorName);
     if (_figure->facetArray.size != 0){
         QPainter p;
         p.begin(this);
@@ -30,4 +36,9 @@ void Canvas::paintEvent(QPaintEvent *event)
         p.end();
     }
 
+}
+
+void Canvas::setBackgroudColorName(QString colorName)
+{
+    _colorName = colorName;
 }

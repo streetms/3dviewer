@@ -9,16 +9,21 @@ DESTDIR += ../build/
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    app.cpp \
     canvas.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    settingwindow.cpp
 
 HEADERS += \
+    app.h \
     canvas.h \
-    mainwindow.h
+    mainwindow.h \
+    settingwindow.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    settingwindow.ui
 
 OBJECTS_DIR =  $$DESTDIR/obj
 MOC_DIR =  $$DESTDIR/moc

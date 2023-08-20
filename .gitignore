@@ -1,6 +1,9 @@
 .idea
 build
 back/matrix/tests
+front/Makefile
+front/*.stash
+front/*.user
 *.out
 *.a
 *.o

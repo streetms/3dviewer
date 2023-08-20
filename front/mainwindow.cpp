@@ -8,7 +8,8 @@
 #include <QTime>
 #include <thread>
 #include <chrono>
-
+#include "app.h"
+#include "settingwindow.h"
 #define M_PI 3.14159
 
 MainWindow::MainWindow(QWidget *parent)
@@ -17,10 +18,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     setlocale(LC_ALL,"C");
 
+
     ui->setupUi(this);
     figure.facetArray.size = 0;
     ui->canvas->setFigure(&figure);
-    ui->canvas->setStyleSheet(("border: 2px solid white; border-radius: 2px; padding: 2px;"));
+
     ui->translateXSpinBox->setMinimum(0);
     ui->translateYSpinBox->setMinimum(0);
     ui->translateXSpinBox->setMaximum(ui->canvas->size().width());
@@ -166,7 +168,7 @@ void MainWindow::on_openFileAction_triggered()
 }
 
 
-void MainWindow::on_action_triggered()
+void MainWindow::on_exportFileAction_triggered()
 {
     QString s = QFileDialog::getSaveFileName();
 
@@ -193,5 +195,16 @@ void MainWindow::on_action_triggered()
              QMessageBox::critical(this,"ошибка","не удалось создать файл");
         }
     }
+}
+
+
+void MainWindow::on_settingsAction_triggered()
+{
+    SettingWindow w;
+    w.setModal(true);
+    w.show();
+    w.exec();
+    QSettings* settings = App::theApp()->getSettings();
+    ui->canvas->setBackgroudColorName(settings->value("background-color","black").toString());
 }
 

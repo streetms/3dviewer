@@ -1,12 +1,11 @@
 #include "mainwindow.h"
 #include <iostream>
 #include <thread>
-#include <QApplication>
+#include "app.h"
 #include "../back/3D.h"
 int main(int argc, char *argv[])
 {
-    //std::cout << std::this_thread::get_id() << "\n";
-    QApplication a(argc, argv);
+    App a(argc, argv,"streetms","3dViewer");
     MainWindow w;
     w.show();
     return a.exec();
