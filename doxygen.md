@@ -37,6 +37,6 @@ The project is built with the `make` command in the `src` folder, there are the 
 - The program allows you to configure the type (solid, dashed), color and thickness of edges, display method (absent, circle, square), color and size of vertices.
 - The program allows you to select the background color
 
- ## Скриншоты
+ ## Screenshots
 
  ![app](screenshots/app.png)  
