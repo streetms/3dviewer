@@ -3,6 +3,9 @@ LIBS = -lcheck -lm
 
 all : main
 
+dvi:
+	doxygen Doxyfile && open doxygen/html/index.html
+
 libmatrix.a :
 	(! [ -d build ] && mkdir build) || (true)
 	(! [ -d build/libs ] && mkdir build/libs) || (true)
